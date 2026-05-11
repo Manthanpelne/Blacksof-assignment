@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Font Family */
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+
+  /* Typography Scale - Easy to tweak pixel values here */
+  --text-display: 50px; /* 64px */
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.02em;
+  --text-display--font-weight: 700;
+
+  --text-h1: 3rem; /* 48px */
+  --text-h1--line-height: 1.2;
+  --text-h1--letter-spacing: -0.02em;
+
+  --text-h2: 2.25rem; /* 36px */
+  --text-h2--line-height: 1.2;
+
+  --text-h3: 1.5rem; /* 24px */
+  --text-h3--line-height: 1.3;
+
+  --text-lead: 1.25rem; /* 20px */
+  --text-lead--line-height: 1.6;
+
+  --spacing-nav-width: 1580px;
+  --spacing-nav-height: 64px;
+  
+  /* Use a standard max-width for the site container based on Figma */
+  --size-container: 1580px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Optional: Base Styles */
+@layer base {
+  body {
+    @apply font-sans text-zinc-900 antialiased;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
 }
