@@ -1,108 +1,55 @@
+"use client";
+import Image from 'next/image';
 import React from 'react';
-import styled from 'styled-components';
 
-const NotificationCard = styled.div<{ index: number }>`
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  min-width: 180px;
-    transform: rotate(-13deg) skew(11deg, -1deg); 
-  position: absolute;
-  top: ${props => props.index * 120}px;
-  left: ${props => props.index * 55}px;
-  z-index: ${props => 10 - props.index};
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4px;
-`;
-
-const ServiceInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const ServiceName = styled.span`
-  color: #8e8e93;
-  font-size: 8px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-`;
-
-const Time = styled.span`
-  color: #8e8e93;
-  font-size: 13px;
-`;
-
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
-`;
-
-const Title = styled.h3`
-  color: #ff3b30;
-  font-size: 11px;
-  font-weight: 600;
-  margin: 0 0 4px 0;
-  text-transform: uppercase;
-`;
-
-const Message = styled.p`
-  color: #000;
-  font-size: 8px;
-  margin: 0;
-  line-height: 1.4;
-`;
-
-const NotificationStack = () => {
+export default function NotificationStack() {
   const notifications = [
-    {
-      service: 'MESSAGES',
-      icon: 'path/to/messages-icon.png', // Replace with actual path
-      time: 'now',
-      title: 'RECIPE ALERT',
-      message: 'The 280 TR chiller has tripped and alarm code is 1. Check the plant room conditions and res...',
-    },
-    {
-      service: 'WHATSAPP',
-      icon: 'path/to/whatsapp-icon.png', // Replace with actual path
-      time: '2m ago',
-      title: '4F NW CORRIDOR AHU AREA OVERCOOLED',
-      message: 'Hello Rahul,\n4F NW Corridor area is overcooled where the area is...',
-    },
-    {
-      service: 'MAIL',
-      icon: 'path/to/mail-icon.png', // Replace with actual path
-      time: '1m ago',
-      title: 'CHILLER 2 250TR TRIPPED (ALERT ID:3657)',
-      message: 'Hello Rahul,\nChiller dripped due to high discharge pressure caused...',
-    },
+    { id: 1, service: "MESSAGES", title: "RECIPE ALERT", time: "now", icon: "/whatsapp.png" },
+    { id: 2, service: "WHATSAPP", title: "4F NW CORRIDOR...", time: "2m ago", icon: "/messages.png" },
+    { id: 3, service: "MAIL", title: "CHILLER 2 250TR...", time: "1m ago", icon: "/mail.png" },
   ];
 
   return (
-    <div className='z-100' style={{ position: 'absolute', left:"450px", top:"255px", height: '500px', margin: '50px' }}>
-      {notifications.map((notification, index) => (
-        <NotificationCard key={index} index={index}>
-          <Header>
-            <ServiceInfo>
-              <Icon src={notification.icon} alt={`${notification.service} icon`} />
-              <ServiceName>{notification.service}</ServiceName>
-            </ServiceInfo>
-            <Time>{notification.time}</Time>
-          </Header>
-          <Title>{notification.title}</Title>
-          <Message>{notification.message}</Message>
-        </NotificationCard>
-      ))}
+    <div className="absolute left-[550px] top-[350px] z-200 w-[280px]">
+      {/* Parent Div */}
+      <div className="relative w-full max-w-[400px]">
+        
+        {notifications.map((n, i) => (
+          <div
+            key={n.id}
+            style={{
+              // This creates the "Decline" effect: moving cards down and right
+              top: `${i * 65}px`,
+              left: `${i *25}px`,
+              zIndex: 10 - i,
+            }}
+            className={`
+              absolute w-[160px] p-2 rounded-xl bg-white shadow-xl border border-gray-100
+              /* THE TILT: Matching the phone angle precisely */
+              transform -rotate-[11deg] skew-x-[11deg] skew-y-[1deg]
+              transition-transform duration-300 hover:scale-105
+            `}
+          >
+            {/* Card Content */}
+            <div className="flex justify-between items-center mb-2">
+              <div className="flex items-center gap-2">
+                <Image src={n.icon} alt="img" width={10} height={10} />
+                <span className="text-[7px] font-bold text-gray-400 tracking-widest">{n.service}</span>
+              </div>
+              <span className="text-[7px] text-gray-400">{n.time}</span>
+            </div>
+            
+            <h3 className="text-[#CA3604] text-[8px] font-bold leading-tight uppercase">
+              {n.title}
+            </h3>
+            
+            <p className="text-[7px] text-gray-800 mt-1 leading-snug">
+              The system has detected a critical alert...
+            </p>
+          </div>
+        ))}
+
+      </div>
     </div>
   );
-};
-
-export default NotificationStack;
+}

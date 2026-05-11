@@ -56,7 +56,7 @@ export default function Hero() {
      </div>
       </motion.div>
 
-
+  {/* mobile  */}
       <motion.div 
         initial={{ y: 200, opacity: 0, rotate: 12 }}
         animate={{ y: 0, opacity: 1, rotate: 12 }}
@@ -74,7 +74,14 @@ export default function Hero() {
         </div>
       </motion.div>
 
+
       {/* cards */}
+        <motion.div 
+        initial={{ y: 200, opacity: 0, rotate: 12 }}
+        animate={{ y: 0, opacity: 1, rotate: 12 }}
+        transition={{ delay: 1.0, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        className="absolute top-[50px] z-50 flex justify-center w-full"
+      >
        <div>
              <div className="z-100 absolute w-[438px] left-[38px] bg-linear-to-b from-[#ffffff] via-[#ffffff] to-[#f3f6f9] rounded-[12px] p-[24px] top-[331px]">
                   <div className="flex items-center gap-2">
@@ -86,9 +93,10 @@ export default function Hero() {
             
              </div>
 
+
              <NotificationStack/>
        </div>
-
+    </motion.div>
     </section>
 
   );
