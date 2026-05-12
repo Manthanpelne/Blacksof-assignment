@@ -27,8 +27,7 @@ To ensure a "buttery smooth" 60FPS experience:
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/dejoule-platform.git](https://github.com/your-username/dejoule-platform.git)
-    cd dejoule-platform
+    git clone https://github.com/Manthanpelne/Blacksof-assignment
     ```
 
 2.  **Install dependencies:**
