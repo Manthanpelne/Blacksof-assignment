@@ -10,7 +10,7 @@ const featureData = [
     title: "Your building's intelligence engine. Learning, adapting, and acting in real time.",
     desc: "Let's bring your systems to life with automation that evolves by the minute, making data-driven decisions to optimize performance.",
     items: ["Joule Recipes for routine actions", "Dynamic equipment orchestration", "Balanced equipment utilization"],
-    media: "https://via.placeholder.com/600x400/f3f4f6/000000?text=Automation+Video+Placeholder",
+    media: "one.gif",
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const featureData = [
     title: "Complete visibility. Seamless control over every asset.",
     desc: "Monitor your entire infrastructure from a single pane of glass. Real-time telemetry ensures you're never in the dark.",
     items: ["Centralized sensor hub", "Asset health tracking", "Remote setpoint adjustment"],
-    media: "https://via.placeholder.com/600x400/e5e7eb/000000?text=Monitoring+Dashboard",
+    media: "tw.gif",
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const featureData = [
     title: "From raw data to real decisions in seconds.",
     desc: "Turn complex data streams into actionable intelligence. Our analytics layer predicts failures before they happen.",
     items: ["Predictive maintenance AI", "Energy waste detection", "SLA compliance reporting"],
-    media: "https://via.placeholder.com/600x400/d1d5db/000000?text=Analytics+Chart",
+    media: "three.gif",
   }
 ];
 
@@ -38,31 +38,31 @@ export default function MidSection() {
   };
 
   return (
-    <section className="z-[200] mt-80 py-24 w-full min-h-screen flex flex-col items-center overflow-hidden">
+    <section className="z-[200] mt-80 py-24 w-full min-h-screen">
       
       {/* 1. HEADER SECTION (Return on Intelligence) */}
-      <div className="w-full m-auto mb-16 grid grid-cols-1 md:grid-cols-2 items-end">
-        <div>
-          <div className="flex items-center gap-2 mb-6">
-            <div className="grid grid-cols-2 gap-1 w-4">
+          <div className="mb-6 flex px-20 items-center gap-2">
+            <div className="grid grid-cols-2  gap-1 w-4">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="w-1.5 h-1.5 bg-[#CA3604] rounded-sm" />
               ))}
             </div>
             <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#CA3604]">Return on Intelligence</span>
           </div>
-          <h2 className="text-5xl font-light leading-tight">
+      <div className="w-full px-20 m-auto flex justify-between items-end">
+        <div>
+          <h2 className="text-5xl font-[200] leading-tight">
             Smarter buildings don't just <br />
-            function. <span className="text-gray-500 font-semibold">They deliver value.</span>
+            function. <span className="text-black font-semibold">They deliver value.</span>
           </h2>
         </div>
-        <div className="text-gray-400 text-lg max-w-md pb-2">
-          When systems think, buildings give back. DeJoule turns every minute into measurable gain across energy, uptime, and user satisfaction.
+        <div className="text-black/50 text-lg max-w-md pb-2">
+          When systems think, buildings give back. DeJoule turns every minute into measurable gain across <span className="text-black">energy, uptime, and user satisfaction</span>.
         </div>
       </div>
 
       {/* 2. INTERACTIVE STACK */}
-      <div className="relative w-full max-w-6xl h-[600px] mt-10">
+      <div className="relative w-full max-w-6xl m-auto h-[600px] mt-54">
         <AnimatePresence mode="popLayout">
           {featureData.map((card, i) => {
             // Logic to determine if card is visible and where
@@ -76,9 +76,10 @@ export default function MidSection() {
               <motion.div
                 key={card.id}
                 initial={{ opacity: 0, y: 100, scale: 0.9 }}
+                viewport={{ once: true, margin: "-200px" }}
                 animate={{
                   opacity: isCurrent ? 1 : (isNext ? 3.8 : 3.4),
-                  y: isCurrent ? 0 : (isNext ? -40 : -80),
+                  y: isCurrent ? 0 : (isNext ? -80 : -160),
                   scale: isCurrent ? 1 : (isNext ? 0.95 : 0.9),
                   zIndex: featureData.length - ((i - index + featureData.length) % featureData.length),
                 }}
@@ -87,17 +88,17 @@ export default function MidSection() {
                 className="absolute inset-0 w-full"
               >
                 {/* CARD CONTENT */}
-                <div className="bg-white text-black rounded-[32px] p-12 flex gap-10 h-full shadow-2xl overflow-hidden border border-gray-200">
+                <div  onClick={nextCard} className="bg-white cursor-pointer text-black rounded-[32px] p-8 flex gap-10 h-full shadow-2xl overflow-hidden border border-gray-200">
                   
                   {/* Left Content */}
                   <div className="flex-1 flex flex-col justify-between">
-                    <div>
+                    <div className="w-[400px]">
                       <div className="flex items-center gap-2 mb-4">
                         <div className="w-2 h-2 rounded-full bg-[#CA3604]" />
                         <span className="font-bold text-sm">{card.tag}</span>
                       </div>
-                      <h3 className="text-3xl font-bold mb-6 leading-snug">{card.title}</h3>
-                      <p className="text-gray-500 text-lg mb-8">{card.desc}</p>
+                      <h3 className="text-2xl font-bold mb-6 leading-snug">{card.title}</h3>
+                      <p className="text-gray-500 text-sm mb-8">{card.desc}</p>
                       
                       <ul className="space-y-4">
                         {card.items.map((item, idx) => (
@@ -118,7 +119,7 @@ export default function MidSection() {
                   </div>
 
                   {/* Right Media Section */}
-                  <div className="flex-1 relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-100">
+                  <div className="w-full shadow relative rounded-2xl overflow-hidden bg-gray-100 ">
                     <img 
                       src={card.media} 
                       alt="feature visualization" 
