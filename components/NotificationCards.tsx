@@ -10,7 +10,7 @@ export default function NotificationStack() {
   ];
 
   return (
-    <div className="absolute left-[590px] top-[350px] z-200 w-[280px]">
+    <div className="absolute left-[577px] top-[350px] z-200 w-[280px]">
       {/* Parent Div */}
       <div className="relative w-full max-w-[400px]">
         
