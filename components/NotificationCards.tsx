@@ -10,7 +10,7 @@ export default function NotificationStack() {
   ];
 
   return (
-    <div className="absolute left-[550px] top-[350px] z-200 w-[280px]">
+    <div className="absolute left-[590px] top-[350px] z-200 w-[280px]">
       {/* Parent Div */}
       <div className="relative w-full max-w-[400px]">
         
@@ -19,8 +19,8 @@ export default function NotificationStack() {
             key={n.id}
             style={{
               // This creates the "Decline" effect: moving cards down and right
-              top: `${i * 65}px`,
-              left: `${i *25}px`,
+              top: `${i * 62}px`,
+              left: `${i * 25}px`,
               zIndex: 10 - i,
             }}
             className={`

@@ -17,7 +17,7 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="w-full max-w-(--size-container) h-(--spacing-nav-height) flex items-center justify-between "
+      className="w-full px-10 max-w-(--size-container) h-(--spacing-nav-height) flex items-center justify-between "
     >
       {/* Logo */}
       <Link href="/" className="flex items-center">
@@ -32,7 +32,7 @@ export default function Navbar() {
       </Link>
 
       {/* Tabs / Navigation Links */}
-      <div className="hidden md:flex items-center gap-8">
+      <div className="hidden md:flex  items-center gap-8">
         {navLinks.map((link) => (
           <Link
             key={link.name}

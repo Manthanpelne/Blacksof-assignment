@@ -1,15 +1,17 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Hero from './Hero'
+import MidSection from './MidSection'
 
 const Homepage = () => {
   return (
-   <section className="px-6 py-[28px]">
+   <section className="w-screen mx-auto py-[28px]">
     
      <Navbar/>
 
       <Hero/>
 
+       <MidSection/>
 
     </section>
   )
