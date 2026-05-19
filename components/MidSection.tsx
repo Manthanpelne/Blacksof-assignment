@@ -22,9 +22,17 @@ const featureData = [
   },
   {
     id: 3,
-    tag: "Smart Analytics",
+    tag: "Smart Alerts",
+    title: "More than alerts. Built-in foresight.",
+    desc: "Alerts that offer more than just a warning—delivering precise, actionable intelligence when it matters most. From early fault detection to guided resolution, your team has everything they need to stay ahead of failures and downtime.",
+    items: ["Predictive maintenance AI", "Energy waste detection", "SLA compliance reporting"],
+    media: "img3.png",
+  },
+  {
+    id: 4,
+    tag: "Smart Analytics & Reporting",
     title: "From raw data to real decisions in seconds.",
-    desc: "Turn complex data streams into actionable intelligence. Our analytics layer predicts failures before they happen.",
+    desc: "An analytics engine that turns operational data into targeted insights that drive action, not just observation. Built for complex facilities, it empowers your team with clear operational visibility, faster response times, and continuous improvement",
     items: ["Predictive maintenance AI", "Energy waste detection", "SLA compliance reporting"],
     media: "three.gif",
   }
@@ -33,22 +41,25 @@ const featureData = [
 export default function MidSection() {
   const [index, setIndex] = useState(0);
 
-  const nextCard = () => {
+  const nextCard = (e?: React.MouseEvent) => {
+    // Prevent the button click from bubbling up and triggering the card click twice
+    if (e) e.stopPropagation();
     setIndex((prev) => (prev + 1) % featureData.length);
   };
 
   return (
-    <section className="z-[200] mt-80 py-24 w-full min-h-screen">
+    <section className="z-[200] mt-100 py-24 w-full min-h-screen">
       
       {/* 1. HEADER SECTION (Return on Intelligence) */}
-          <div className="mb-6 flex px-20 items-center gap-2">
-            <div className="grid grid-cols-2  gap-1 w-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-1.5 h-1.5 bg-[#CA3604] rounded-sm" />
-              ))}
-            </div>
-            <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#CA3604]">Return on Intelligence</span>
-          </div>
+      <div className="mb-6 flex px-20 items-center gap-2">
+        <div className="grid grid-cols-2 gap-1 w-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="w-1.5 h-1.5 bg-[#CA3604] rounded-sm" />
+          ))}
+        </div>
+        <span className="text-xs uppercase tracking-[0.2em] font-bold text-[#CA3604]">Return on Intelligence</span>
+      </div>
+      
       <div className="w-full px-20 m-auto flex justify-between items-end">
         <div>
           <h2 className="text-5xl font-[200] leading-tight">
@@ -62,74 +73,79 @@ export default function MidSection() {
       </div>
 
       {/* 2. INTERACTIVE STACK */}
-      <div className="relative w-full max-w-6xl m-auto h-[600px] mt-54">
+      <div className="relative w-full max-w-[1330px] m-auto h-[600px] mt-[254px]">
         <AnimatePresence mode="popLayout">
           {featureData.map((card, i) => {
-            // Logic to determine if card is visible and where
-            if (i < index && i !== index - 1 && !(index === 0 && i === featureData.length -1)) return null;
-            
-            const isCurrent = i === index;
-            const isNext = i === (index + 1) % featureData.length;
-            const isThird = i === (index + 2) % featureData.length;
+            // Calculate where this card lives relative to the active index
+            const relativeIndex = (i - index + featureData.length) % featureData.length;
+            const isCurrent = relativeIndex === 0;
 
             return (
               <motion.div
                 key={card.id}
                 initial={{ opacity: 0, y: 100, scale: 0.9 }}
-                viewport={{ once: true, margin: "-200px" }}
                 animate={{
-                  opacity: isCurrent ? 1 : (isNext ? 3.8 : 3.4),
-                  y: isCurrent ? 0 : (isNext ? -80 : -160),
-                  scale: isCurrent ? 1 : (isNext ? 0.95 : 0.9),
-                  zIndex: featureData.length - ((i - index + featureData.length) % featureData.length),
+                  // Current card is fully solid, background layers subtly fade back
+                  opacity: isCurrent ? 1 : Math.max(2.4, 1 - relativeIndex * 0.25),
+                  
+                  // Adjusting offsets to keep the spacing uniform for all 4 layers
+                  y: isCurrent ? 0 : relativeIndex * -75,  
+                  scale: isCurrent ? 1 : 1 - relativeIndex * 0.03,
+                  zIndex: featureData.length - relativeIndex,
                 }}
-                exit={{ y: -500, opacity: 0, transition: { duration: 0.6 } }}
-                transition={{ type: "spring", stiffness: 260, damping: 20 }}
+                exit={{ 
+                  y: -550, 
+                  opacity: 0, 
+                  scale: 0.95,
+                  transition: { duration: 0.5, ease: [0.32, 0, 0.67, 0] } 
+                }}
+                transition={{ type: "spring", stiffness: 220, damping: 22 }}
                 className="absolute inset-0 w-full"
+                onClick={isCurrent ? () => nextCard() : undefined}
               >
                 {/* CARD CONTENT */}
-                <div  onClick={nextCard} className="bg-white cursor-pointer text-black rounded-[32px] p-8 flex gap-10 h-full shadow-2xl overflow-hidden border border-gray-200">
+                <div className="bg-white cursor-pointer text-black rounded-[32px] shadow-[inset_0_2px_4px_rgb(253,245,242),_inset_0_5px_20px_rgb(253,245,242)] py-8 pl-12 flex gap-20 h-[620px] bg-linear-to-br from-[#ffffff] via-[#ffffff] to-[#E7ECF2] overflow-hidden">
                   
                   {/* Left Content */}
-                  <div className="flex-1 flex flex-col justify-between">
+                  <div className="flex-1 items-center justify-between ">
                     <div className="w-[400px]">
-                      <div className="flex items-center gap-2 mb-4">
+                      <div className="flex items-center gap-6 mb-4">
                         <div className="w-2 h-2 rounded-full bg-[#CA3604]" />
-                        <span className="font-bold text-sm">{card.tag}</span>
+                        <span className="font-[400] text-[28px]">{card.tag}</span>
                       </div>
-                      <h3 className="text-2xl font-bold mb-6 leading-snug">{card.title}</h3>
+                      <h3 className="text-[24px] font-[400] mb-6 leading-snug">{card.title}</h3>
                       <p className="text-gray-500 text-sm mb-8">{card.desc}</p>
                       
                       <ul className="space-y-4">
                         {card.items.map((item, idx) => (
                           <li key={idx} className="flex justify-between items-center border-b border-gray-100 pb-2">
                             <span className="text-gray-800">{item}</span>
-                            <span className="text-[#CA3604] font-bold">+</span>
+                            <span className="font-bold">+</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     <button 
-                      onClick={nextCard}
-                      className="mt-8 bg-[#fef1ec] text-[#CA3604] py-4 px-8 rounded-full font-bold w-fit hover:bg-[#CA3604] hover:text-white transition-colors duration-300"
+                      onClick={(e) => nextCard(e)}
+                      className="mt-18 text-xl bg-[#fef1ec] shadow-[inset_0_2px_4px_rgba(0,0,0,0.1),_inset_0_1px_10px_rgb(250,190,170)] bg-clip-text text-transparent bg-linear-to-r from-[#CA3604] to-[#000000] py-4 px-8 rounded-full font-bold w-fit hover:bg-[#CA3604] hover:text-white transition-colors duration-300"
                     >
                       See how it works
                     </button>
                   </div>
 
                   {/* Right Media Section */}
-                  <div className="w-full shadow relative rounded-2xl overflow-hidden bg-gray-100 ">
+                  <div className="w-full h-[430px] mt-16 shadow relative rounded-l-2xl overflow-hidden bg-gray-100">
                     <img 
                       src={card.media} 
                       alt="feature visualization" 
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-fill"
                     />
                   </div>
                 </div>
               </motion.div>
             );
-          }).reverse()} {/* Reverse ensures the correct stacking order */}
+          }).reverse()} {/* Reverse ensures proper CSS painting order */}
         </AnimatePresence>
       </div>
     </section>

@@ -89,7 +89,7 @@ export default function Hero() {
         initial={{ y: 200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1.0, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute px-10 top-[20px] z-200 flex justify-center w-full"
+        className="absolute px-10 top-[20px] left-[15px]  z-200 flex justify-center w-full"
       >
        <div>
              <div className="z-100 absolute w-[438px] left-[38px] bg-linear-to-b from-[#ffffff] via-[#ffffff] to-[#f3f6f9] rounded-[12px] p-[24px] top-[331px]">
@@ -214,7 +214,7 @@ export default function Hero() {
                     zIndex: index // Ensures newer cards are always on top
                     }}
                     transition={{ duration: 0.8, ease: "circOut" }}
-                    className="absolute top-0 left-0 w-[447px] bg-white shadow-xl rounded-xl p-6 border border-gray-100"
+                    className="absolute top-0 left-0 w-[447px]  p-6"
                   >
                     <h2 className="text-xl mb-2 font-semibold text-[#CA3604]">{card.title}</h2>
                     <p className="text-black/60">{card.desc}</p>
